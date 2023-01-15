@@ -1,11 +1,6 @@
 require("dotenv").config()
 const fs = require("fs")
 
-// für discord.js@13.9.0
-//const { Client, Collection, Intents } = require("discord.js")
-//const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS] })
-
-// // für discord.js@14.7.1
 const { Client, Collection, GatewayIntentBits, Partials, ActivityType, InteractionType } = require("discord.js")
 const client = new Client({
   intents: [
@@ -33,17 +28,10 @@ eventFiles.forEach(eventFile => {
 
 client.once("ready", () => {
   console.log(`Ready! Logged in as ${client.user.tag}! I'm on ${client.guilds.cache.size}`)
-  // für discord.js@13.9.0
-  //client.user.setActivity({ name: "mit dem Code", type: "PLAYING" })
-  // für discord.js@14.7.1
   client.user.setActivity({ name: "mit dem Code", type: ActivityType.Playing })
 })
 
 client.on("interactionCreate", async (interaction) => {
-  // für discord.js@13.9.0
-  //if (!interaction.isCommand()) return
-  // für discord.js@14.7.1
-  //if (interaction.type !== InteractionType.ApplicationCommand) return
   if (interaction.type !== InteractionType.ApplicationCommand) return
 
   const command = client.commands.get(interaction.commandName)
