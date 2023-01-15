@@ -3,21 +3,21 @@ const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, Butt
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("rps")
-    .setDescription("Rock Paper Scissors!"),
+    .setDescription("Stein Papier Schere!"),
   async execute(interaction) {
     let hand = [
       {
-        txt: 'Rock',
+        txt: 'Stein',
         emoji: '✊',
         index: 0
       },
       {
-        txt: 'Paper',
+        txt: 'Papier',
         emoji: '🤚',
         index: 0
       },
       {
-        txt: 'Scissors',
+        txt: 'Schere',
         emoji: '✌️',
         index: 0
       },
@@ -29,8 +29,8 @@ module.exports = {
       embeds: [
         new EmbedBuilder()
           .setColor('0x0099FF')
-          .setTitle('Rock Paper Scissors')
-          .setDescription('Choos a handsign!')
+          .setTitle('Stein Papier Schere')
+          .setDescription('Wähle ein Handzeichen aus!')
           .setImage('https://static.vecteezy.com/system/resources/previews/000/691/497/non_2x/rock-paper-scissors-neon-icons-vector.jpg')
       ],
       components: [
@@ -38,15 +38,15 @@ module.exports = {
           .addComponents(
             new ButtonBuilder()
               .setCustomId('rps_rock')
-              .setLabel('✊ Rock')
+              .setLabel('✊ Stein')
               .setStyle(ButtonStyle.Primary),
             new ButtonBuilder()
               .setCustomId('rps_scissors')
-              .setLabel('✌️ Scissors')
+              .setLabel('✌️ Schere')
               .setStyle(ButtonStyle.Primary),
             new ButtonBuilder()
               .setCustomId('rps_paper')
-              .setLabel('🤚 Paper')
+              .setLabel('🤚 Papier')
               .setStyle(ButtonStyle.Primary),
           )
       ],
@@ -64,7 +64,6 @@ module.exports = {
     });
 
     collector.on('collect', async (i) => {
-      //collector.rest.on('collect', async (i) => {
       if (!i.isButton()) return;
 
       if (i.customId.startsWith('rps')) {
@@ -86,7 +85,7 @@ module.exports = {
 
         let einbettung = rpsMsg.embeds[0]
         einbettung.color = 'BLUE';
-        einbettung.description = `I choose ${botMove.txt}! ${win == 0 ? 'You lost!' : (win == 1 ? 'We tide!' : 'You win')} (${userMove.emoji} ${win == 0 ? '<' : (win == 1 ? '=' : '>')} ${botMove.emoji})`;
+        einbettung.description = `Ich wählte ${botMove.txt}! ${win == 0 ? 'Du hast verloren!' : (win == 1 ? 'Wir treiben!' : 'Du hast gewonnen')} (${userMove.emoji} ${win == 0 ? '<' : (win == 1 ? '=' : '>')} ${botMove.emoji})`;
 
         let components = rpsMsg.components
 

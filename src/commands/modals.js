@@ -8,12 +8,12 @@ module.exports = {
   async execute(interaction, client) {
     if (interaction.isChatInputCommand()) {
       const modal = new ModalBuilder()
-        .setCustomId(`embedModal`)
-        .setTitle(`Fav Color?`)
+        .setCustomId("embedModal")
+        .setTitle("Bevorzugte Farbe?")
 
       const textInput = new TextInputBuilder()
-        .setCustomId(`favColorInput`)
-        .setLabel(`Why is your fvorite color?`)
+        .setCustomId("favColorInput")
+        .setLabel("Was ist deine lieblings Farbe?")
         .setRequired(true)
         .setStyle(TextInputStyle.Short);
 
@@ -25,12 +25,7 @@ module.exports = {
       const { modals } = client;
       const { customId } = interaction;
       const modal = modals.get(customId);
-      if (!modal) return new Error("There is no code fore this modal.");
-      // try {
-      //   await modal.execute(interaction, client);
-      // } catch (error) {
-      //   console.error(error);
-      // }
+      if (!modal) return new Error("Für dieses Modal gibt es keinen Code.");
     }
   }
 }

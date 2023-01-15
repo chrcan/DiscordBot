@@ -4,7 +4,6 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("info")
     .setDescription("Zeige Informationen über den Server oder einen User an")
-    //.addStringOption(option => option.setName("test").setDescription("test").setRequired(true)),
     .addSubcommand(subCommand => subCommand.setName("server").setDescription("Zeige Informationen über den Server an."))
     .addSubcommand(subCommand => subCommand.setName("member").setDescription("Zeige Informationen über einen Member an.")
       .addUserOption(option => option.setName("member").setDescription("Der Member").setRequired(true))),
@@ -13,9 +12,6 @@ module.exports = {
       case "server": {
         interaction.reply({
           embeds: [
-            // für discord.js@13.9.0
-            //new MessageEmbed()
-            // für discord.js@14.7.1
             new EmbedBuilder()
               .setTitle(`Informationen für die Guild ${interaction.guild.name}`)
               .addFields([
@@ -38,9 +34,6 @@ module.exports = {
         const member = interaction.options.getMember("member")
         interaction.reply({
           embeds: [
-            // für discord.js@13.9.0
-            //new MessageEmbed()
-            // für discord.js@14.7.1
             new EmbedBuilder()
               .setTitle(`Informationen über ${member.toString()}`)
               .addFields([

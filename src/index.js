@@ -27,7 +27,7 @@ eventFiles.forEach(eventFile => {
 })
 
 client.once("ready", () => {
-  console.log(`Ready! Logged in as ${client.user.tag}! I'm on ${client.guilds.cache.size}`)
+  console.log(`Bereit! Eingeloggt als ${client.user.tag}! Ich bin bei ${client.guilds.cache.size}`)
   client.user.setActivity({ name: "mit dem Code", type: ActivityType.Playing })
 })
 

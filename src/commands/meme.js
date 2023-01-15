@@ -5,10 +5,10 @@ const fetch = require('node-fetch')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("meme")
-    .setDescription("Get a meme!")
+    .setDescription("Holen dir ein Meme!")
     .addStringOption(option =>
       option.setName("platform")
-        .setDescription("Meme platform (optional)")
+        .setDescription("Meme-Plattform (optional)")
         .addChoices(
           { name: "Reddit", value: "reddit" },
           { name: "Giphy", value: "giphy" }
