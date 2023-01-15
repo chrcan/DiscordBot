@@ -26,11 +26,11 @@ module.exports = {
       const { customId } = interaction;
       const modal = modals.get(customId);
       if (!modal) return new Error("There is no code fore this modal.");
-      try {
-        await modal.execute(interaction, client);
-      } catch (error) {
-        console.error(error);
-      }
+      // try {
+      //   await modal.execute(interaction, client);
+      // } catch (error) {
+      //   console.error(error);
+      // }
     }
   }
 }
