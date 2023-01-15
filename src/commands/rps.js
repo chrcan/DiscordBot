@@ -2,8 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, Butt
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("rps")
-    .setDescription("Stein Papier Schere!"),
+    .setName("ssp")
+    .setDescription("Stein Schere Papier!"),
   async execute(interaction) {
     let hand = [
       {
@@ -25,11 +25,11 @@ module.exports = {
 
     let botMove = hand[Math.floor(Math.random() * 3)];
 
-    const rpsMsg = await interaction.reply({
+    const sspMsg = await interaction.reply({
       embeds: [
         new EmbedBuilder()
           .setColor('0x0099FF')
-          .setTitle('Stein Papier Schere')
+          .setTitle('Stein Schere Papier')
           .setDescription('Wähle ein Handzeichen aus!')
           .setImage('https://static.vecteezy.com/system/resources/previews/000/691/497/non_2x/rock-paper-scissors-neon-icons-vector.jpg')
       ],
@@ -37,15 +37,15 @@ module.exports = {
         new ActionRowBuilder()
           .addComponents(
             new ButtonBuilder()
-              .setCustomId('rps_rock')
+              .setCustomId('ssp_rock')
               .setLabel('✊ Stein')
               .setStyle(ButtonStyle.Primary),
             new ButtonBuilder()
-              .setCustomId('rps_scissors')
+              .setCustomId('ssp_scissors')
               .setLabel('✌️ Schere')
               .setStyle(ButtonStyle.Primary),
             new ButtonBuilder()
-              .setCustomId('rps_paper')
+              .setCustomId('ssp_paper')
               .setLabel('🤚 Papier')
               .setStyle(ButtonStyle.Primary),
           )
@@ -66,7 +66,7 @@ module.exports = {
     collector.on('collect', async (i) => {
       if (!i.isButton()) return;
 
-      if (i.customId.startsWith('rps')) {
+      if (i.customId.startsWith('ssp')) {
         await i.deferUpdate();
         let move = i.customId.split('_')[1]
         userMove = hand.find(v => v.txt.toLowerCase() == move);
@@ -83,11 +83,11 @@ module.exports = {
             break;
         }
 
-        let einbettung = rpsMsg.embeds[0]
+        let einbettung = sspMsg.embeds[0]
         einbettung.color = 'BLUE';
         einbettung.description = `Ich wählte ${botMove.txt}! ${win == 0 ? 'Du hast verloren!' : (win == 1 ? 'Wir treiben!' : 'Du hast gewonnen')} (${userMove.emoji} ${win == 0 ? '<' : (win == 1 ? '=' : '>')} ${botMove.emoji})`;
 
-        let components = rpsMsg.components
+        let components = sspMsg.components
 
         components[0].components.forEach(comp => {
           if (comp.customId == i.customId) {
@@ -96,8 +96,8 @@ module.exports = {
           } else comp.disabled = true;
         });
 
-        //await rpsMsg.edit({ embeds: [embed], components: components, fetchyReply: true });
-        await rpsMsg.edit({ embeds: [einbettung], components: components, fetchReply: true });
+        //await sspMsg.edit({ embeds: [embed], components: components, fetchyReply: true });
+        await sspMsg.edit({ embeds: [einbettung], components: components, fetchReply: true });
 
         collector.stop()
       }
