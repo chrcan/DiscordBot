@@ -60,7 +60,7 @@ client.on(Events.InteractionCreate, async interaction => {
   const name = interaction.fields.getTextInputValue("name");
   const about = interaction.fields.getTextInputValue("about");
 
-  console.log(`Name: ${name} \n \nAbout the person: ${about}`)
+  console.log(`Name: ${name} \n \nSag uns was über deine Person: ${about}`)
 })
 // Client Login
 client.login(process.env.DISCORD_BOT_TOKEN);
