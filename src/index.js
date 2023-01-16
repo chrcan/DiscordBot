@@ -1,7 +1,7 @@
 require("dotenv").config()
 const fs = require("fs")
 
-const { Client, Collection, GatewayIntentBits, Partials, ActivityType, InteractionType } = require("discord.js")
+const { Client, Collection, GatewayIntentBits, Partials, ActivityType, InteractionType, Events } = require("discord.js")
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -26,9 +26,10 @@ eventFiles.forEach(eventFile => {
   client.on(event.name, (...args) => event.execute(...args))
 })
 
+//Der Client ist eingeloggt
 client.once("ready", () => {
   console.log(`Bereit! Eingeloggt als ${client.user.tag}! Ich bin bei ${client.guilds.cache.size}`)
-  client.user.setActivity({ name: "mit dem Code", type: ActivityType.Playing })
+  client.user.setActivity({ name: "dir zu", type: ActivityType.Watching })
 })
 
 client.on("interactionCreate", async (interaction) => {
@@ -48,6 +49,18 @@ client.on("interactionCreate", async (interaction) => {
       }
     }
   }
+})
+
+client.on(Events.InteractionCreate, async interaction => {
+  if (!interaction.isModalSubmit()) return;
+  if (interaction.customId === 'modal') {
+    await interaction.reply({ content: "Dein Modal wurde abgesendet", ephemeral: true })
+  }
+
+  const name = interaction.fields.getTextInputValue("name");
+  const about = interaction.fields.getTextInputValue("about");
+
+  console.log(`Name: ${name} \n \nAbout the person: ${about}`)
 })
 // Client Login
 client.login(process.env.DISCORD_BOT_TOKEN);
