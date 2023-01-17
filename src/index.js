@@ -1,7 +1,7 @@
 require("dotenv").config()
 const fs = require("fs")
 
-const { Client, Collection, GatewayIntentBits, Partials, ActivityType, InteractionType, Events } = require("discord.js")
+const { Client, Collection, GatewayIntentBits, Partials, ActivityType, InteractionType, Events, EmbedBuilder } = require("discord.js")
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -57,10 +57,27 @@ client.on(Events.InteractionCreate, async interaction => {
   if (interaction.customId === 'modal') {
     await interaction.reply({ content: "Dein Modal wurde abgesendet", ephemeral: true })
   }
+
+  // Zeigt die Modal-Eingabe in discord an
   const name = interaction.fields.getTextInputValue("name");
   const about = interaction.fields.getTextInputValue("about");
+  const author = interaction.fields.getTextInputValue("author");
 
-  console.log(`Name: ${name} \n \nSag uns was über deine Person: ${about}`)
+  const embed = new EmbedBuilder()
+    .setColor("#ffcc3f")
+    .setTitle("Deine Eingabe im Modal")
+    .setThumbnail('https://i.imgur.com/FjincTg.png')
+    .addFields(
+      { name: 'Author:', value: `${author}`, inline: true },
+      { name: 'Name:', value: `${name}`, inline: true },
+      { name: 'Sag uns was über deine Person:', value: `${about}` },
+    )
+  await interaction.channel.send({ embeds: [embed] })
+
+  // console.log(`Author: ${author} \n \nName: ${name} \n \nSag uns was über deine Person: ${about}`)
+
+  // const content = `Author: ${author} \nName: ${name} \nÜber deine Person: ${about}`;
+  // await interaction.channel.send(content);
 })
 // Client Login
 client.login(process.env.DISCORD_BOT_TOKEN);
