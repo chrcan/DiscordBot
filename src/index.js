@@ -79,5 +79,6 @@ client.on(Events.InteractionCreate, async interaction => {
   // const content = `Author: ${author} \nName: ${name} \nÜber deine Person: ${about}`;
   // await interaction.channel.send(content);
 })
+
 // Client Login
 client.login(process.env.DISCORD_BOT_TOKEN);

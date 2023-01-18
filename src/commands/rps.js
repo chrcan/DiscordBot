@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, ApplicationCommandType, ApplicationCommandOptionType } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -72,13 +72,13 @@ module.exports = {
         userMove = hand.find(v => v.txt.toLowerCase() == move);
 
         switch (move) {
-          case 'rock':
+          case 'stein':
             win = botMove.index == 0 ? 1 : (botMove.index == 1 ? 0 : 2);
             break;
-          case 'scissors':
+          case 'schere':
             win = botMove.index == 0 ? 0 : (botMove.index == 1 ? 2 : 1);
             break;
-          case 'paper':
+          case 'papier':
             win = botMove.index == 0 ? 2 : (botMove.index == 1 ? 1 : 0);
             break;
         }
@@ -96,7 +96,6 @@ module.exports = {
           } else comp.disabled = true;
         });
 
-        //await sspMsg.edit({ embeds: [embed], components: components, fetchyReply: true });
         await sspMsg.edit({ embeds: [einbettung], components: components, fetchReply: true });
 
         collector.stop()
