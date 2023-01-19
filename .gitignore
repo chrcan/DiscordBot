@@ -4,3 +4,4 @@
 /*.js
 /.env
 /node_modules
+/discloud.config
